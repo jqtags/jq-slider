@@ -1,14 +1,9 @@
 {
-	"name" : "jqtags/jq-slider",
-	"modules" : [
-		{
-			"name" : "jqtags/jq-slider",
-			"js" : [
-				"jqtags.slider.js"
-			],
-			"css" : [],
-			"dependsOn" : []
-		}
-	]
-
+	"jqtags/jq-slider": {
+		"js": ["jqtags.slider.js"],
+	},
+	"seiyria/bootstrap-slider": {
+		"js": ["dist/bootstrap-slider.min.js"],
+		"css": ["dist/css/bootstrap-slider.css"]
+	}
 }

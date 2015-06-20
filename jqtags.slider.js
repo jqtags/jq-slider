@@ -1,9 +1,9 @@
-utils.define('jqtags.slider').extend('jqtag').as(function(test){
+_tag_('jqtags.slider',function(test){
 	
-	utils.require(":seiyria/bootstrap-slider");
-	var $ = jQuery;
+	_require_(":seiyria/bootstrap-slider");
+	var jq = _module_('jQuery');
 	
-	test.register({
+	return ({
 	    tagName: "jq-slider",
 	    events: {
 	        "slide input":"toggleValue"
@@ -15,15 +15,19 @@ utils.define('jqtags.slider').extend('jqtag').as(function(test){
 	    },	
 	    attachedCallback: function () {
 	    	var self = this;
-	    	this.$inputTag = $('<input type="text" value=""/>');
-	        $(this.$).append(this.$inputTag);
+	    	
+	    	this.$inputTag = jq('<input type="text" value=""/>');
+	    	
+	    	jq(this.$).append(this.$inputTag);
 	        
 	        for(var i in this.$.dataset){
 	        	this.$inputTag[0].dataset[i] = this.$.dataset[i]
 	        }
+	        
 	        this.$inputTag.slider({}).on('slide',function(e){
 	        	self.toggleValue(e);
 	        });
+	        
 	    },
 	    toggleValue : function(e){
 	    	this.$.value=e.value;
