@@ -1,7 +1,23 @@
-<jq-slider id="sampleslider" rx-value="model.dateValue"  rx-on-change="mychangefun">
+<jq-slider id="sampleslider"
+rx-min="model.min"  rx-value="model.value"  rx-max="model.max"
+rx-on-change="mychangefun"
+>
 </jq-slider>
 
+
+<jq-slider2 id="sampleslider2"
+min="50"  value="70"  max="90"
+rx-on-chnage="mychangefun"
+>
+</jq-slider2>
+
 <hr/>
-Date Value Changed to = {model.dateValue}
+Date Value Changed to = {model.value}
 <hr/>
-<!-- //<input type="text" value="" rx-value="model.dateValue"  /> -->
+<input rx-value="model.value">
+<hr/>
+
+<!-- console.warn(data.name); -->
+{{data.name}}
+
+<pt-progressbar id="prog" rx-min="model.min"  rx-value="model.value"  rx-max="model.max" showStatus striped active></pt-progressbar>
