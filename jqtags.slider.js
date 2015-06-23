@@ -27,6 +27,10 @@ _tag_('jqtags.slider',function(slider){
 	        	type : 'string',
 	        	default : "10",
 	        	onChange : "setAttr"
+	        },
+	        tooltipSplit : {
+		        type : 'boolean',
+	        	default : true
 	        }
 	    },	
 	    attachedCallback: function () {
@@ -39,11 +43,14 @@ _tag_('jqtags.slider',function(slider){
 	        //console.warn("$input.dataset[i]",$input.dataset)
 	        setTimeout(function(){
 		    	//console.warn("00", self.$.max);
-		    	["Max","Min","Value"].map(function(key){
-		    		$input.dataset['slider'+key] = self.$[key.toLowerCase()];
+		    	[
+		    	 ["Max", "max"],["Min", "min"],["Value2","value2"],["TooltipSplit","tooltipSplit"]
+		    	].map(function(key){
+		    		$input.dataset['slider'+key[0]] = self.$[key[1]];
 		    	});
 		    	
-	        	self.$slider = new Slider($input)
+	        	self.$slider = new Slider($input);
+	        	self.setValue();
 	        	//console.info("self.$slider",self.$slider);
 	        	jq(self.$).find("input,div.slider").on('change',function(e,target){
 		        	 //console.log("changif",e);
@@ -62,15 +69,18 @@ _tag_('jqtags.slider',function(slider){
 	    		return window.preventPropagation(e);
 	    	}
 	    },
+	    setValue : function(){
+    		var value = (this.$.value+"").split(",");
+	    	if(value.length === 2){
+	    		this.$slider.refresh();
+		    	this.$slider["setValue"]([value[0]-0,value[1]-0]);
+	    	} else {
+	    		this.$slider["setValue"](value[0]-0);
+	    	}
+	    },
 	    valueOnSet : function(e){
 	    	if(this.$slider){
-	    		var value = (this.$.value+"").split(",");
-	    		//console.info("valueOnSet",value);
-		    	if(value.length === 2){
-			    	this.$slider["setValue"]([value[0]-0,value[1]-0]);
-		    	} else {
-		    		this.$slider["setValue"](value[0]-0);
-		    	}
+	    		this.setValue();
 		    	//this.$.value = 
 		    	//console.info("valueOnSet",e)
 		    	this.valueChange();
