@@ -1,6 +1,6 @@
 _spam_('jqtags.slider.demo',function(demo,_demo_){
 	
-	utils.require(":jqtags/jq-slider");
+	_require_(":seiyria/bootstrap-slider",":jqtags/jq-slider");
 	
 	demo._ready_ = function(){
 		//$("head").append('<link rel="import" href="'+CONTEXT_PATH+'lib/pitana/pt-progressbar/src/pt-progressbar.html">');

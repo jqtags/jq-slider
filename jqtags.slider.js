@@ -4,7 +4,7 @@ _tag_('jqtags.slider',function(slider){
 	//_require_(":webmodules/jquery_ui");
 	var jq = _module_('jQuery');
 	var Slider = _module_("Slider");
-	var sliderFun = jq.fn.bootstrapSlider ? "bootstrapSlider" : "slider"
+	var sliderFun = jq.fn.bootstrapSlider ? "bootstrapSlider" : "slider";
 	
 	return ({
 	    tagName: "jq-slider",
@@ -40,7 +40,10 @@ _tag_('jqtags.slider',function(slider){
 	    },	
 	    attachedCallback: function () {
 	    	var self = this;
-	    	if(Slider ===!undefined){
+	    	
+	    	Slider = _module_("Slider");
+	    	//console.error(_module_("Slider"))
+	    	if(Slider !== undefined){
 		    	var $input = document.createElement("input");
 		    	this.$.appendChild($input);
 		    	//var $input = $("<input rx-value='model.value'>")[0];
@@ -55,7 +58,7 @@ _tag_('jqtags.slider',function(slider){
 			    	].map(function(key){
 			    		$input.dataset['slider'+key[0]] = self.$[key[1]];
 			    	});
-			    	
+			    	//console.error("$input",$input);
 		        	self.$slider = new Slider($input);
 		        	self.setValue();
 		        	//console.info("self.$slider",self.$slider);
@@ -67,6 +70,7 @@ _tag_('jqtags.slider',function(slider){
 		        })
 	    	} else if(jq.fn.slider){
 	    		setTimeout(function(){
+	    			//console.error("$slider_ui",self.$slider_ui);
 		    		self.$slider_ui = jq(self.$).slider({
 						range : true,
 						min : self.$.min,
@@ -104,8 +108,14 @@ _tag_('jqtags.slider',function(slider){
 	    },
 	    setValue : function(){
     		var value = (this.$.value+"").split(",");
+    		
     		if(this.$slider){
     	    	if(value.length === 2){
+    	    		if(!this.range){
+    	    			this.setAttr("range",true,true);
+    	    			this.$slider.refresh();
+    	    			this.range = true;
+    	    		}
     		    	this.$slider["setValue"]([value[0]-0,value[1]-0]);
     	    	} else {
     	    		this.$slider["setValue"](value[0]-0);
@@ -141,5 +151,7 @@ _tag_('jqtags.slider',function(slider){
 	    	this.$slider[sliderFun]("refresh");
 	    }
 	});
+	
+	
 	
 });
