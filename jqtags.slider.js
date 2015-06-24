@@ -1,16 +1,17 @@
 _tag_('jqtags.slider',function(slider){
 	
 	//_require_(":seiyria/bootstrap-slider");
+	//_require_(":webmodules/jquery_ui");
 	var jq = _module_('jQuery');
 	var Slider = _module_("Slider");
-	var sliderFun = $.fn.bootstrapSlider ? "bootstrapSlider" : "slider"
+	var sliderFun = jq.fn.bootstrapSlider ? "bootstrapSlider" : "slider"
 	
 	return ({
 	    tagName: "jq-slider",
 	    //template : "",
 	    events: {
-	        //"change input":"toggleValue"
-	       // "change" : "onChange"
+	        //"click input":"toggleValue"
+	       "change input[range]" : "rangeChange"
 	    },
 	    accessors: {
 	        value: {
@@ -64,19 +65,33 @@ _tag_('jqtags.slider',function(slider){
 			        	 return self.onChange(e);
 				     });
 		        })
+	    	} else if(jq.fn.slider){
+	    		setTimeout(function(){
+		    		self.$slider_ui = jq(self.$).slider({
+						range : true,
+						min : self.$.min,
+						max : self.$.max,
+						//values : [0, 50000],
+						slide : function(event, ui) {
+				        	 self.$.value=ui.values[0]+","+ui.values[1];
+				        	 return self.onChange(event);
+						}
+		    		});
+		    		self.setValue()
+	    		}) 
 	    	} else {
-	    		self.$slider_ui = jq(this.$).slider({
-					range : true,
-					min : self.$.min,
-					max : self.$.max,
-					//values : [0, 50000],
-					slide : function(event, ui) {
-			        	 self.$.value=ui.values[0]+","+ui.values[1];
-			        	 return self.onChange(event);
-					}
-	    		});
-	    		self.setValue()
+		    	self.$input = document.createElement("input");
+		    	self.$input.type="range";
+		    	self.$input.max=self.$.max;
+		    	self.$input.min=self.$.min;
+		    	self.$input.value=self.$.value;
+		    	self.$.appendChild(self.$input);
+		    	self.setValue();
 	    	}
+	    },
+	    rangeChange : function(e,target){
+	    	this.$.value = e.target.value;
+	    	return this.onChange(e,target);
 	    },
 	    detachedCallback : function(){
 	    	
@@ -101,6 +116,8 @@ _tag_('jqtags.slider',function(slider){
     	    	} else {
     	    		this.$slider_ui.slider("option","value",value[0]-0);
     	    	}
+    		} else if(this.$input){
+    			this.$input.value = value;
     		}
 	    },
 	    valueOnSet : function(e){
