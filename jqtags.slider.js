@@ -73,8 +73,8 @@ _tag_('jqtags.slider',function(slider){
 	    			//console.error("$slider_ui",self.$slider_ui);
 		    		self.$slider_ui = jq(self.$).slider({
 						range : true,
-						min : self.$.min,
-						max : self.$.max,
+						min : self.$.min-0,
+						max : self.$.max-0,
 						//values : [0, 50000],
 						slide : function(event, ui) {
 				        	 self.$.value=ui.values[0]+","+ui.values[1];
