@@ -29,6 +29,14 @@ _tag_('jqtags.slider',function(slider){
 	        	default : "10",
 	        	onChange : "setAttr"
 	        },
+	        range : {
+	        	type : 'boolean',
+	        	default : true
+	        },
+	        step : {
+	        	type : 'int',
+	        	default : 1
+	        },
 	        tooltipSplit : {
 		        type : 'boolean',
 	        	default : true
@@ -53,7 +61,7 @@ _tag_('jqtags.slider',function(slider){
 		        setTimeout(function(){
 			    	//console.warn("00", self.$.max);
 			    	[
-			    	 ["Max", "max"],["Min", "min"],["Value2","value2"],["TooltipSplit","tooltipSplit"],
+			    	 ["Max", "max"],["Min", "min"],["Value2","value2"],["TooltipSplit","tooltipSplit"],["Step","step"],
 			    	 ["Tooltip","tooltip"]
 			    	].map(function(key){
 			    		$input.dataset['slider'+key[0]] = self.$[key[1]];
@@ -67,22 +75,28 @@ _tag_('jqtags.slider',function(slider){
 			        	 self.$.value=self.$slider.getValue();
 			        	 return self.onChange(e);
 				     });
-		        })
+		        });
 	    	} else if(jq.fn.slider){
 	    		setTimeout(function(){
 	    			//console.error("$slider_ui",self.$slider_ui);
+	    			//console.debug("self.$.min",self.$.min,self.$.max,self.$.value, self.$.getAttribute("range"),self.$.range);
 		    		self.$slider_ui = jq(self.$).slider({
-						range : true,
+						range : self.$.range,
 						min : self.$.min-0,
 						max : self.$.max-0,
+						step : self.$.step,
 						//values : [0, 50000],
 						slide : function(event, ui) {
-				        	 self.$.value=ui.values[0]+","+ui.values[1];
-				        	 return self.onChange(event);
+							if(self.$.range){
+								self.$.value=ui.values[0]+","+ui.values[1];
+							} else {
+								self.$.value = ui.value;
+							}
+				        	return self.onChange(event);
 						}
 		    		});
 		    		self.setValue()
-	    		}) 
+	    		});
 	    	} else {
 		    	self.$input = document.createElement("input");
 		    	self.$input.type="range";
@@ -108,9 +122,8 @@ _tag_('jqtags.slider',function(slider){
 	    },
 	    setValue : function(){
     		var value = (this.$.value+"").split(",");
-    		
     		if(this.$slider){
-    	    	if(value.length === 2){
+    	    	if(this.$.range){
     	    		if(!this.range){
     	    			this.setAttr("range",true,true);
     	    			this.$slider.refresh();
@@ -121,7 +134,8 @@ _tag_('jqtags.slider',function(slider){
     	    		this.$slider["setValue"](value[0]-0);
     	    	}
     		} else if(this.$slider_ui){
-    	    	if(value.length === 2){
+    	    	if(this.$.range){
+    	    		this.range = true;
     		    	this.$slider_ui.slider("option","values",[value[0]-0,value[1]-0]);
     	    	} else {
     	    		this.$slider_ui.slider("option","value",value[0]-0);
