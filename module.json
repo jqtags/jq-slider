@@ -1,6 +1,6 @@
 {
 	"jqtags/jq-slider": {
-		"js": ["jqtags.slider.js"],
+		"js": ["jqtags.slider.js"]
 	},
 	"seiyria/bootstrap-slider": {
 		"js": ["dist/bootstrap-slider.min.js"],
