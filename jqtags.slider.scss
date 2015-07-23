@@ -1,0 +1,23 @@
+jq-slider {
+   position: relative;
+    text-align: left;
+  &.ui-slider{
+    display : block;
+     background: #cccccc;
+     .ui-slider-range{
+        background: #00cc99;
+        position : absolute;
+        height: 4px;
+     }
+    .ui-slider-handle{
+        position : absolute;
+        z-index : 2;
+        height: 21px;
+        width: 21px;
+        cursor:pointer;
+        border-radius: 50%;
+        background: #fff;
+        margin: -12px 0 0 0;
+    }
+  }
+}

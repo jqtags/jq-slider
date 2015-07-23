@@ -16,17 +16,17 @@ _tag_('jqtags.slider',function(slider){
 	    accessors: {
 	        value: {
 	            type: "string",
-	            default : "0",
+	            default : "",
 	            onChange : "valueOnSet"
 	        },
 	        max : {
 	        	type : 'string',
-	        	default : "0",
+	        	default : "10",
 	        	onChange : "setAttr"
 	        },
 	        min : {
 	        	type : 'string',
-	        	default : "10",
+	        	default : "1",
 	        	onChange : "setAttr"
 	        },
 	        range : {
@@ -48,6 +48,14 @@ _tag_('jqtags.slider',function(slider){
 	    },	
 	    attachedCallback: function () {
 	    	var self = this;
+	    	var min = self.$.min-0, max=self.$.max-0;
+	    	if(this.$.value===""){
+	    		if(this.$.range){
+	    			this.$.value = [min,max];
+	    		} else {
+	    			this.$.value = min;
+	    		}
+	    	}
 	    	
 	    	Slider = _module_("Slider");
 	    	//console.error(_module_("Slider"))
@@ -79,13 +87,14 @@ _tag_('jqtags.slider',function(slider){
 	    	} else if(jq.fn.slider){
 	    		setTimeout(function(){
 	    			//console.error("$slider_ui",self.$slider_ui);
-	    			//console.debug("self.$.min",self.$.min,self.$.max,self.$.value, self.$.getAttribute("range"),self.$.range);
+	    			//console.debug("self.$.min",self.$.min,self.$.max,self.$.value, self.$.getAttribute("range"),self.$.range)
+	    			//var value = 
 		    		self.$slider_ui = jq(self.$).slider({
 						range : self.$.range,
-						min : self.$.min-0,
-						max : self.$.max-0,
+						min : min,
+						max : max,
 						step : self.$.step,
-						//values : [0, 50000],
+						values : self.$.range ? self.$.value : undefined,
 						slide : function(event, ui) {
 							if(self.$.range){
 								self.$.value=ui.values[0]+","+ui.values[1];
@@ -95,7 +104,7 @@ _tag_('jqtags.slider',function(slider){
 				        	return self.onChange(event);
 						}
 		    		});
-		    		self.setValue()
+		    		self.setValue();
 	    		});
 	    	} else {
 		    	self.$input = document.createElement("input");
