@@ -1,13 +1,13 @@
 {
-    "name": "jqtags/jq-slider",
-    "type": "tag",
-    "description": "fancy bootstrap slider",
-    "keywords": ["x-tag", "polymer", "pitana"],
-    "license": "MIT",
+	"name": "jqtags/jq-slider",
+	"type": "tag",
+	"description": "fancy bootstrap slider",
+	"keywords": ["x-tag", "polymer", "pitana"],
+	"license": "MIT",
 
-    "require": {
-      "jqgeeks/jqtag" : ">=0.0.0",
-      "seiyria/bootstrap-slider" : ">=0.0.0"
-    }
-    
+	"require": {
+		"webmodules/jqtag": ">=0.0.0",
+		"webmodules/jqueryui": "1.11.42",
+		"seiyria/bootstrap-slider": ">=0.0.0"
+	}
 }

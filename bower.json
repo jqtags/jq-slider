@@ -1,0 +1,13 @@
+{
+	"name": "jqtags-jq-slider",
+	"main": "jqtags.slider.js",
+	"authors": ["Lalit Tanwar <lalit.tanwar07@gmail.com>"],
+	"description": "fancy bootstrap slider",
+	"keywords": ["pitana", "jquery"],
+	"dependencies": {
+		"webmodules-jqtag": ">=0.0.0",
+		"webmodules-jqueryui": "1.11.42"
+	},
+	"license": "MIT",
+	"ignore": ["**/.*", "node_modules", "bower_components"]
+}

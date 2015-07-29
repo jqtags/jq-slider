@@ -1,7 +1,5 @@
 _tag_('jqtags.slider',function(slider){
 	
-	//_require_(":seiyria/bootstrap-slider");
-	//_require_(":webmodules/jquery_ui");
 	var jq = _module_('jQuery');
 	var Slider = _module_("Slider");
 	var sliderFun = jq.fn.bootstrapSlider ? "bootstrapSlider" : "slider";
@@ -174,7 +172,5 @@ _tag_('jqtags.slider',function(slider){
 	    	this.$slider[sliderFun]("refresh");
 	    }
 	});
-	
-	
 	
 });
