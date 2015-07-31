@@ -7,7 +7,7 @@
 
 	"require": {
 		"webmodules/jqtag": ">=0.0.0",
-		"webmodules/jqueryui": "1.11.42",
+		"webmodules/jqueryui": ">=1.11.42",
 		"seiyria/bootstrap-slider": ">=0.0.0"
 	}
 }

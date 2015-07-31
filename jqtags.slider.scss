@@ -1,13 +1,24 @@
 jq-slider {
-   position: relative;
+    position: relative;
     text-align: left;
+    -moz-appearance: range;
+    -webkit-appearance: range;
+    line-height: 20px;
+    display: block;
+    position: relative;
+    float: none;
+    height: 4px;
+    margin: 8px;
   &.ui-slider{
-    display : block;
-     background: #cccccc;
+     display : block;
+     background: grey;
      .ui-slider-range{
-        background: #00cc99;
+        background: black;
         position : absolute;
-        height: 4px;
+        height: 7px;
+        top: -4px;
+        padding: -1px;
+        margin: 1px 10px;
      }
     .ui-slider-handle{
         position : absolute;
@@ -16,7 +27,7 @@ jq-slider {
         width: 21px;
         cursor:pointer;
         border-radius: 50%;
-        background: #fff;
+        background: black;
         margin: -12px 0 0 0;
     }
   }

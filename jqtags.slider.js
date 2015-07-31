@@ -74,7 +74,7 @@ _tag_('jqtags.slider',function(slider){
 			    	});
 			    	//console.error("$input",$input);
 		        	self.$slider = new Slider($input);
-		        	self.setValue();
+		        	self.setValue(self.$.value);
 		        	//console.info("self.$slider",self.$slider);
 		        	jq(self.$).find("input,div.slider").on('change',function(e,target){
 			        	 //console.log("changif",e);
@@ -102,7 +102,7 @@ _tag_('jqtags.slider',function(slider){
 				        	return self.onChange(event);
 						}
 		    		});
-		    		self.setValue();
+		    		self.setValue(self.$.value);
 	    		});
 	    	} else {
 		    	self.$input = document.createElement("input");
@@ -111,7 +111,7 @@ _tag_('jqtags.slider',function(slider){
 		    	self.$input.min=self.$.min;
 		    	self.$input.value=self.$.value;
 		    	self.$.appendChild(self.$input);
-		    	self.setValue();
+		    	self.setValue(self.$input.value);
 	    	}
 	    },
 	    rangeChange : function(e,target){
@@ -127,20 +127,21 @@ _tag_('jqtags.slider',function(slider){
 	    		return window.preventPropagation(e);
 	    	}
 	    },
-	    setValue : function(){
-    		var value = (this.$.value+"").split(",");
+	    setValue : function(value){
+    		var value = (value+"").split(",");
     		if(this.$slider){
     	    	if(this.$.range){
-    	    		if(!this.range){
-    	    			this.setAttr("range",true,true);
-    	    			this.$slider.refresh();
-    	    			this.range = true;
-    	    		}
+    	    		//if(!this.range && false){
+    	    			//this.setAttr("range",true,true);
+    	    		//	this.$slider.refresh();
+    	    		//	this.range = true;
+    	    		//}
     		    	this.$slider["setValue"]([value[0]-0,value[1]-0]);
     	    	} else {
     	    		this.$slider["setValue"](value[0]-0);
     	    	}
     		} else if(this.$slider_ui){
+    			console.info("value",value)
     	    	if(this.$.range){
     	    		this.range = true;
     		    	this.$slider_ui.slider("option","values",[value[0]-0,value[1]-0]);
@@ -151,14 +152,16 @@ _tag_('jqtags.slider',function(slider){
     			this.$input.value = value;
     		}
 	    },
-	    valueOnSet : function(e){
+	    valueOnSet : function(e,oldvalue,newval){
 	    	if(this.$slider || this.$slider_ui){
-	    		this.setValue();
-		    	this.valueChange();
+	    		this.setValue(newval);
+	    		// No needt to trigger on Change as it is set internally by javascript
+	    		//if((""+oldvalue) !== (""+newval)){
+	    		//	//this.valueChange();
+	    		//}
 	    	}
 	    },
 	    valueChange : function(){
-	    	//console.debug("trigger changes*******************")
 			slider.trigger(this.$,"input");
 	    	slider.trigger(this.$,"change");
 	    },

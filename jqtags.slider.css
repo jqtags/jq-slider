@@ -1,20 +1,31 @@
-/* line 1, ../../../../../resources/scss/tags/tags.scss */
+/* line 1, ../../../../src/external/components/jqtags-jq-slider/jqtags.slider.scss */
 jq-slider {
-  display: block;
   position: relative;
   text-align: left;
-}
-/* line 6, ../../../../../resources/scss/tags/tags.scss */
-jq-slider.ui-slider {
-  background: #cccccc;
-}
-/* line 8, ../../../../../resources/scss/tags/tags.scss */
-jq-slider.ui-slider .ui-slider-range {
-  background: #00cc99;
-  position: absolute;
+  -moz-appearance: range;
+  -webkit-appearance: range;
+  line-height: 20px;
+  display: block;
+  position: relative;
+  float: none;
   height: 4px;
+  margin: 8px;
 }
-/* line 13, ../../../../../resources/scss/tags/tags.scss */
+/* line 12, ../../../../src/external/components/jqtags-jq-slider/jqtags.slider.scss */
+jq-slider.ui-slider {
+  display: block;
+  background: grey;
+}
+/* line 15, ../../../../src/external/components/jqtags-jq-slider/jqtags.slider.scss */
+jq-slider.ui-slider .ui-slider-range {
+  background: black;
+  position: absolute;
+  height: 7px;
+  top: -4px;
+  padding: -1px;
+  margin: 1px 10px;
+}
+/* line 23, ../../../../src/external/components/jqtags-jq-slider/jqtags.slider.scss */
 jq-slider.ui-slider .ui-slider-handle {
   position: absolute;
   z-index: 2;
@@ -22,22 +33,6 @@ jq-slider.ui-slider .ui-slider-handle {
   width: 21px;
   cursor: pointer;
   border-radius: 50%;
-  background: #fff;
+  background: black;
   margin: -12px 0 0 0;
-}
-
-/* line 40, ../../../../../resources/scss/tags/tags.scss */
-.slider-cir-left, .slider-cir-right {
-  height: 21px;
-  width: 21px;
-  display: inline-block;
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-  margin: -12px 0 0 0;
-}
-
-/* line 50, ../../../../../resources/scss/tags/tags.scss */
-.slider-cir-right {
-  float: right;
 }

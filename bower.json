@@ -6,7 +6,7 @@
 	"keywords": ["pitana", "jquery"],
 	"dependencies": {
 		"webmodules-jqtag": ">=0.0.0",
-		"webmodules-jqueryui": "1.11.42"
+		"webmodules-jqueryui": ">=1.11.42"
 	},
 	"license": "MIT",
 	"ignore": ["**/.*", "node_modules", "bower_components"]
