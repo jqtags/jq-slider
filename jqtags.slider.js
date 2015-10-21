@@ -100,6 +100,10 @@ _tag_('jqtags.slider',function(slider){
 								self.$.value = ui.value;
 							}
 				        	return self.onChange(event);
+						},
+						// Triggers when dragging/sliding stops
+						stop: function(event, ui) {
+							return self.onSlideStop(event);
 						}
 		    		});
 		    		self.setValue(self.$.value);
@@ -114,6 +118,12 @@ _tag_('jqtags.slider',function(slider){
 		    	self.setValue(self.$input.value);
 	    	}
 	    },
+
+	    onSlideStop: function(e, target) {
+	    	// Trigger the slideStop event
+	    	slider.trigger(this.$, "slidestop");
+	    },
+
 	    rangeChange : function(e,target){
 	    	this.$.value = e.target.value;
 	    	return this.onChange(e,target);
