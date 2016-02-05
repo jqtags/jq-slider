@@ -101,10 +101,16 @@ _tag_('jqtags.slider',function(slider){
 							}
 				        	return self.onChange(event);
 						},
+
+						start: function(event, ui) {
+							return self.onSlideStart(ui);
+						},
+
 						// Triggers when dragging/sliding stops
 						stop: function(event, ui) {
 							return self.onSlideStop(event);
 						}
+
 		    		});
 		    		self.setValue(self.$.value);
 	    		});
@@ -122,6 +128,11 @@ _tag_('jqtags.slider',function(slider){
 	    onSlideStop: function(e, target) {
 	    	// Trigger the slideStop event
 	    	slider.trigger(this.$, "slidestop");
+	    },
+
+	    onSlideStart: function(ui) {
+	    	// Trigger the slideStart event
+	    	slider.trigger(this.$, "slide.start", {ui: ui});
 	    },
 
 	    rangeChange : function(e,target){
